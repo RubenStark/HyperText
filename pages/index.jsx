@@ -1,55 +1,70 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 
+import demo from '../components/info';
+
 function Home() {
+
   const [text, setText] = useState('');
-  const [words, setWords] = useState([]);
   const [currentWord, setCurrentWord] = useState('');
   var [time, setTime] = useState(60000 / 300);
   const [timerIds, setTimerIds] = useState([]);
 
+  useEffect(() => {
+    console.log('text changed');
+    const keyPressHandler = (e) => {
+      if (e.key === 'Enter') {
+        console.log('enter pressed');
+        getCurrentWord();
+      }
+    };
+    document.addEventListener('keypress', keyPressHandler);
+    return () => {
+      document.removeEventListener('keypress', keyPressHandler);
+    }
+  }, [text]);
+
   const handleChange = (e) => {
     setText(e.target.value);
-    if (e.key === 'Enter') {
-      splitWords();
-      handleWord();
-    }
   }
 
-  const handleWord = () => {
-    for (let i = 0; i < words.length; i++) {
+  const splitWords = () => {
+
+    var words = text.split(' ');
+    console.log(words);
+
+    words.forEach((word, index) => {
       const timerId = setTimeout(() => {
-        setCurrentWord(words[i]);
-      }, time * i);
-      setTimerIds((prevTimerIds) => [...prevTimerIds, timerId]);
-    }
+        setCurrentWord(word);
+        console.log(word);
+      }, time * index);
+      setTimerIds((timerIds) => [...timerIds, timerId]);
+    });
+
+  }
+
+  function getCurrentWord() {
+    splitWords();
+  }
+
+
+  const handleDemo = () => {
+    const textarea = document.getElementById('textarea');
+    textarea.value = demo;
+    setText(demo);
   }
 
   const handleReset = () => {
     timerIds.forEach((id) => clearTimeout(id));
     setTimerIds([]);
     setText('');
-    setWords([]);
     setCurrentWord('');
-  }
-
-  const splitWords = () => {
-    //split text into words and separate them by a space or a new line
-    setWords(text.split(/[\s ]+/));
   }
 
   const handleWPM = (e) => {
     setTime(60000 / e.target.value);
-    if (e.key === 'Enter') {
-      splitWords();
-      handleWord();
-    }
+    console.log(e.target.value);
   }
-
-  useEffect(() => {
-    console.log(time);
-  }, [time]);
-
   return (
     <>
       <Head>
@@ -74,20 +89,28 @@ function Home() {
             <textarea
               placeholder="Type your text"
               name="text"
-              id=""
+              id="textarea"
               className='input h-72 w-full max-w-5xl text-gray-900'
               onChange={handleChange}
               onKeyPress={handleChange}
             />
 
-            <input
-              type="text"
-              name="text"
-              className="wpm bottom-10 absolute"
-              placeholder="How many words per minute?"
-              onChange={handleWPM}
-              onKeyPress={handleWPM}
-            />
+            <div className='bottom-10 absolute flex gap-5'>
+              <input
+                type="text"
+                name="text"
+                className="wpm"
+                placeholder="How many words per minute?"
+                onChange={handleWPM}
+                onKeyPress={handleWPM}
+                value={60000 / time}
+              />
+              <button
+                onClick={handleDemo}
+              >
+                Demo
+              </button>
+            </div>
           </>
         )}
       </main>
