@@ -53,7 +53,7 @@ function Home() {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Hyper Text</title>
         <meta name="description" content="Hyper Text, a new way to read" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
