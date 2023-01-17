@@ -1,6 +1,6 @@
 # HyperText - Un proyecto para leer más rápido
 
-HyperText es una herramienta desarrollada para mejorar la velocidad de lectura al presentar el contenido en formato de hipertexto. Utiliza técnicas de procesamiento de lenguaje natural para analizar el contenido y presentarlo de manera más clara y concisa.
+HyperText es una herramienta desarrollada para mejorar la velocidad de lectura al presentar el contenido en un nuevo formato. Utiliza técnicas de procesamiento de lenguaje natural para analizar el contenido y presentarlo de manera más clara y concisa.
 
 ## Características
 
