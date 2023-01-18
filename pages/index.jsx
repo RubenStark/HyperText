@@ -1,3 +1,4 @@
+import FloatingButton from '@/components/floatingButton';
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 
@@ -65,6 +66,7 @@ function Home() {
     setTime(60000 / e.target.value);
     console.log(e.target.value);
   }
+  
   return (
     <>
       <Head>
@@ -111,6 +113,7 @@ function Home() {
                 Demo
               </button>
             </div>
+            <FloatingButton onClick={getCurrentWord}/>
           </>
         )}
       </main>
