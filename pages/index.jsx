@@ -98,7 +98,7 @@ function Home() {
             />
 
             <div className='bottom-10 absolute flex gap-2'>
-              <FloatingButton onClick={getCurrentWord} />
+              <button onClick={handleDemo}>Demo</button>
               <input
                 type="text"
                 name="text"
@@ -108,11 +108,7 @@ function Home() {
                 onKeyPress={handleWPM}
                 value={60000 / time}
               />
-              <button
-                onClick={handleDemo}
-              >
-                Demo
-              </button>
+              <FloatingButton onClick={getCurrentWord} />
             </div>
           </>
         )}
