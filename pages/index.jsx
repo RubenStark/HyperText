@@ -66,7 +66,7 @@ function Home() {
     setTime(60000 / e.target.value);
     console.log(e.target.value);
   }
-  
+
   return (
     <>
       <Head>
@@ -97,7 +97,8 @@ function Home() {
               onKeyPress={handleChange}
             />
 
-            <div className='bottom-10 absolute flex gap-5'>
+            <div className='bottom-10 absolute flex gap-2'>
+              <FloatingButton onClick={getCurrentWord} />
               <input
                 type="text"
                 name="text"
@@ -113,7 +114,6 @@ function Home() {
                 Demo
               </button>
             </div>
-            <FloatingButton onClick={getCurrentWord}/>
           </>
         )}
       </main>
